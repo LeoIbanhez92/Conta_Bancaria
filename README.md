@@ -10,12 +10,12 @@
 <br />
 
 <div align="center">
-  <img src="https://img.shields.io/github/languages/top/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/repo-size/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/languages/count/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/last-commit/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/issues/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
-  <img src="https://img.shields.io/github/issues-pr/rafaelq80/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/languages/top/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/repo-size/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/languages/count/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/last-commit/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/issues/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
+  <img src="https://img.shields.io/github/issues-pr/LeoIbanhez92/conta_bancaria_ts_2026?style=flat-square" />
   <img src="https://img.shields.io/badge/status-conclu%C3%ADdo-brightgreen" alt="Status: Concluído">
 </div>
 
@@ -252,8 +252,8 @@ Este projeto está sob licença **MIT** — livre para uso educacional e profiss
 
 **Rafael — Desenvolvedor Full Stack & Instrutor**
 
-🔗 **GitHub:** https://github.com/rafaelq80
+🔗 **GitHub:** https://github.com/LeoIbanhez92
 
-🔗 **LinkedIn:** https://www.linkedin.com/in/rafaelq80
+🔗 **LinkedIn:** https://www.linkedin.com/in/LeoIbanhez92
 
 Projeto desenvolvido para **aprendizado contínuo**, **demonstração técnica** e **portfólio profissional**.
