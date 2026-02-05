@@ -1,13 +1,13 @@
-import leia from "readline-sync";
 import { colors } from "./src/util/Colors";
 import { Conta } from "./src/model/Conta";
+import { Input } from "./src/util/Input";
 
 export function main() {
     let opcao: number;
 
     //INSTANCIAR OBJETOS DA CLASSE CONTA
 
-    const c1 = new Conta(1 ,1234 ,"Sofia", 1 , 1000000.00);;
+    const c1 = new Conta(1, 1234, "Sofia", 1, 1000000.00);
 
     c1.visualizar();
 
@@ -49,45 +49,64 @@ export function main() {
         console.log("                                                     ",
             colors.reset);
 
-        opcao = leia.questionInt("Digite a operação desejada: ");
+
+        console.log("Digite a operação desejada: ");
+
+        opcao = Input.questionInt("");
 
         if (opcao === 0) {
             sobre();
-            process.exit();
+            process.exit(0);
         }
 
 
         switch (opcao) {
             case 1:
                 console.log("\nCriar Conta! ");
+
+                keyPress()
                 break;
 
             case 2:
                 console.log("\nListar todas as Contas! ");
+                1
+                keyPress()
                 break;
 
             case 3:
                 console.log("\nBuscar conta por Número! ");
+
+                keyPress()
                 break;
 
             case 4:
                 console.log("\nAtualizar dados da Conta! ");
+
+                keyPress()
                 break;
 
             case 5:
                 console.log("\nConta apagada!");
+
+                keyPress()
                 break;
 
             case 6:
                 console.log("\nDinheiro sacado! ");
+
+                keyPress()
                 break;
 
             case 7:
                 console.log("\nValor Depositado ");
+
+                keyPress()
                 break;
 
             case 8:
                 console.log("\nValor Transferido");
+
+                keyPress()
                 break;
             default:
                 console.log("ERRO: Operação inválida");
@@ -106,6 +125,12 @@ function sobre(): void {
     console.log("\ngithub.com/LeoIbanhez92");
     console.log("*****************************************************",
         colors.reset);
+}
+
+function keyPress(): void {
+    console.log(colors.reset, "");
+    console.log("\nPressione enter para continuar...");
+    Input.prompt();
 }
 
 main();
