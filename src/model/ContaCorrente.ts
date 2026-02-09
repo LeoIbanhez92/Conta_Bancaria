@@ -1,4 +1,5 @@
 import { colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
 import { Conta } from "./Conta";
 
 //HERANÇA DA CLASSE CONTA
@@ -46,7 +47,7 @@ export class ContaCorrente extends Conta {
     //MÉTODO VISUALIZAR SOBRESCRITO (POLIMORFISMO)
     public visualizar(): void {
         super.visualizar();
-        console.log(`Limite da Conta: R$ ${this._limite.toFixed(2)}`);
+        console.log(`Limite da Conta: R$ ${formatarMoeda(this._limite)}`);
     }
 
 
