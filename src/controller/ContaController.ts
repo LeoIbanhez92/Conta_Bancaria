@@ -1,6 +1,7 @@
 import { Conta } from "../model/Conta";
 import { ContaRepository } from "../repository/ContaRepository";
 import { colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
 
 export class ContaController implements ContaRepository {
 
@@ -23,6 +24,23 @@ export class ContaController implements ContaRepository {
         for (let conta of this.listaContas) {
             conta.visualizar();
         }
+    }
+
+    procurarPorTitular(titular: string): void {
+
+        //! FILTRAGEM DOS DADOS
+        const buscaPorTitular =this.listaContas.filter(conta => 
+            conta.titular.toUpperCase().includes(titular.toUpperCase()));
+
+        //!LISTAGEM DOS DADOS FILTRADOS
+
+        if(buscaPorTitular.length > 0){
+            buscaPorTitular.forEach( conta => conta.visualizar());
+
+        }else {
+            console.log(colors.fg.red,"Nenhuma conta foi encontrada", colors.reset);
+        }
+
     }
 
     cadastrar(conta: Conta): void {
@@ -52,16 +70,42 @@ export class ContaController implements ContaRepository {
 
     }
 
+    //!MÉTODO BANCÁRIO
+
     sacar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
+        const buscaConta = this.buscarNoArray(numero);
+        if (buscaConta !== null) {
+            if(buscaConta.sacar(valor) === true)
+                console.log(colors.fg.red, `\nO saque no valor de${formatarMoeda(valor)} na Conta número ${numero} foi Realizada com Sucesso!`, colors.reset);
+
+        } else
+            console.log(colors.fg.red, "\nConta não Encontrada!", colors.reset);
     }
 
-    depositar(number: number, valor: number): void {
-        throw new Error("Method not implemented.");
+    depositar(numero: number, valor: number): void {
+        const buscaConta = this.buscarNoArray(numero);
+        if (buscaConta !== null) {
+            buscaConta.depositar(valor)
+                console.log(colors.fg.red, `\nO Depósito no valor de${formatarMoeda(valor)} na Conta número ${numero} foi Realizada com Sucesso!`, colors.reset);
+
+        } else
+            console.log(colors.fg.red, "\nConta não Encontrada!", colors.reset);
     }
 
     transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-        throw new Error("Method not implemented.");
+        const buscaContaOrigem = this.buscarNoArray(numeroOrigem);
+        const buscaContaDestino = this.buscarNoArray(numeroDestino);
+
+        if (buscaContaOrigem !== null && buscaContaDestino !== null) {
+            if(buscaContaOrigem.sacar(valor) === true){
+                buscaContaDestino.depositar(valor);
+                console.log(colors.fg.red, `\nA transferência no valor de${formatarMoeda(valor)} da Conta número ${numeroOrigem}
+                para a Conta ${numeroDestino} foi realizada com Sucesso!`, colors.reset);
+            }
+                
+            
+        } else
+            console.log(colors.fg.red, "\nA Conta de origem e/ou destino não foram Encontrada!", colors.reset);
     }
 
     //MÉTODO AUXILIAR

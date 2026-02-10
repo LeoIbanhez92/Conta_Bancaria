@@ -37,6 +37,7 @@ export function main() {
         console.log("*           6 - Sacar                               *");
         console.log("*           7 - Depositar                           *");
         console.log("*           8 - Transferir valores entre Contas     *");
+        console.log("*           8 - Buscar conta por nome do Titular    *");
         console.log("*           0 - Sair                                *");
         console.log("*                                                   *");
         console.log("* ************************************************* *");
@@ -58,17 +59,17 @@ export function main() {
             case 1:
                 console.log("\nCriar Conta! ");
 
-                criarConta()
+                criarConta();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 2:
                 console.log("\nListar de todas as Contas! ");
 
-                listarTodasContas()
+                listarTodasContas();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 3:
@@ -76,7 +77,7 @@ export function main() {
 
                 buscarContaPorNumero();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 4:
@@ -84,7 +85,7 @@ export function main() {
 
                 atualizarConta();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 5:
@@ -92,26 +93,38 @@ export function main() {
 
                 deletarContaPorNumero();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 6:
                 console.log("\nDinheiro sacado! ");
 
-                keyPress()
+                sacar();
+
+                keyPress();
                 break;
 
             case 7:
                 console.log("\nValor Depositado ");
+                depositar();
 
-                keyPress()
+                keyPress();
                 break;
 
             case 8:
                 console.log("\nValor Transferido");
 
-                keyPress()
+                transferir();
+
+                keyPress();
                 break;
+
+            case 9:
+                console.log("Procurar conta por nome do Titular");
+
+                procurarPorTitular();
+                keyPress();
+            break
             default:
                 console.log("ERRO: Operação inválida");
         }
@@ -135,7 +148,7 @@ function criarConta() {
     console.log("Digite o saldo da conta: ");
     const saldo = Input.questionFloat("");
 
-    
+
 
     switch (tipo) {
         case 1://CONTA CORRENTE
@@ -154,7 +167,7 @@ function criarConta() {
 
 /*OPÇÃO 2: lISTAR TODAS AS CONTAS CADASTRADAS */
 
-function listarTodasContas(): void{
+function listarTodasContas(): void {
     contas.listarTodas();
 }
 
@@ -188,8 +201,8 @@ function atualizarConta(): void {
         console.log(`\nAgência Atual: ${agencia}`);
         console.log("Digite o novo número da agência: ");
         console.log("(Pressione ENTER para manter o valor atual)");
-        
-        agencia = Input.questionInt("",{defaultInput: titular})
+
+        agencia = Input.questionInt("", { defaultInput: titular })
 
         //ATUALIZAÇÃO DO TITULAR
 
@@ -245,20 +258,20 @@ function atualizarConta(): void {
 
 /*OPÇÃO 5: DELETAR UMA CONTA PELO NÚMERO */
 
-function deletarContaPorNumero(): void{
+function deletarContaPorNumero(): void {
 
     // Solicita o número da conta
     console.log("Digite o número da conta: ");
     const numero = Input.questionInt("");
-    
+
     // Verifica se a conta existe
     const conta = contas.buscarNoArray(numero);
 
     // Se a conta existir...
-    if(conta !== null){
-        
+    if (conta !== null) {
+
         // Exibe a mensagem de confirmação da exclusão (Yes ou No)
-        console.log(colors.fg.whitestrong, 
+        console.log(colors.fg.whitestrong,
             `\nTem certeza que deseja deletar a conta número ${numero} [y/n]?`, colors.reset);
         const confirma = Input.keyInYNStrict("");
 
@@ -266,13 +279,84 @@ function deletarContaPorNumero(): void{
         if (confirma)
             contas.deletar(numero);
         else
-            console.log(colors.fg.red,"\nOperação cancelada!", colors.reset);
-    
+            console.log(colors.fg.red, "\nOperação cancelada!", colors.reset);
 
-    }else{
+
+    } else {
         console.log(colors.fg.red, `A conta número ${numero} não foi encontrada!`, colors.reset);
     }
 
+}
+
+function sacar(): void {
+    console.log("Digite o número da conta: ");
+    const numero = Input.questionInt("");
+
+    // Verifica se a conta existe
+    const conta = contas.buscarNoArray(numero);
+
+    if (conta !== null) {
+        console.log("Digite o valor do saque");
+        const valor = Input.questionFloat("");
+        contas.sacar(numero, valor);
+    } else {
+        console.log(colors.fg.red, `A conta número ${numero} não foi encontrado!`, colors.reset);
+    }
+
+}
+function depositar(): void {
+    console.log("Digite o número da conta: ");
+    const numero = Input.questionInt("");
+
+    // Verifica se a conta existe
+    const conta = contas.buscarNoArray(numero);
+
+    if (conta !== null) {
+        console.log("Digite o valor do Depósito");
+        const valor = Input.questionFloat("");
+        contas.depositar(numero, valor);
+    } else {
+        console.log(colors.fg.red, `A conta número ${numero} não foi encontrado!`, colors.reset);
+    }
+
+}
+
+function transferir(): void {
+    console.log("Digite o número da Conta de Origin: ");
+    const numeroOrigem = Input.questionInt("");
+
+    console.log("Digite o número da Conta de Destino: ");
+    const numeroDestino = Input.questionInt("");
+
+    const contaOrigem = contas.buscarNoArray(numeroOrigem);
+    const contaDestino = contas.buscarNoArray(numeroDestino);
+
+
+    if (contaOrigem === null) {
+
+        console.log(colors.fg.red, `A conta de origim número ${numeroOrigem} não foi encontrado!`, colors.reset);
+
+    } else if (contaDestino === null) {
+
+        console.log(colors.fg.red, `A conta de origim número ${numeroOrigem} não foi encontrado!`, colors.reset);
+
+    } else {
+        console.log("Digite o valor do Depósito");
+        const valor = Input.questionFloat("");
+
+        contas.transferir(numeroOrigem, numeroDestino,valor);
+    }
+
+}
+
+function procurarPorTitular(): void {
+    //! SOLICITAR O NOME DO TITULAR
+    console.log("Digite o Nome do Titular");
+    const titular = Input.question("");
+
+    //! LOCALIZAR A CONTA A PARTIR DO NOME DO TITULAR
+
+    contas.procurarPorTitular(titular);
 }
 
 
@@ -306,8 +390,5 @@ function criarContasTeste(): void {
 
 }
 
-function yOuN(conta: string): boolean{
-    return conta.trim().toLowerCase() === "y";
-}
 
 main();
